@@ -209,8 +209,7 @@ AI_BASE_URL=https://api.deepseek.com/v1
     if (!(await fs.pathExists(configPath))) {
         const configContent = {
             source: 'docs',
-            target: 'en',
-            model: 'deepseek-chat',
+            target: 'zh',
             glossary: null
         };
         await fs.writeJson(configPath, configContent, { spaces: 2 });
