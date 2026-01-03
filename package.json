@@ -1,0 +1,65 @@
+{
+  "name": "vitepress-ai-i18n",
+  "version": "1.0.0",
+  "description": "A CLI tool to automate VitePress documentation translation using AI.",
+  "type": "module",
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "bin": {
+    "vpi": "./dist/index.js"
+  },
+  "files": [
+    "dist",
+    "README.md",
+    "README_zh.md"
+  ],
+  "scripts": {
+    "dev": "tsup src/index.ts --format esm --watch",
+    "build": "tsup src/index.ts --format esm --clean --dts --minify",
+    "prepublishOnly": "pnpm build",
+    "release": "npx changeset"
+  },
+  "keywords": [
+    "vitepress",
+    "i18n",
+    "translation",
+    "automation",
+    "vpi",
+    "ai",
+    "openai",
+    "deepseek",
+    "documentation",
+    "cli"
+  ],
+  "author": {
+    "name": "HoHu",
+    "email": "hohu@hohu.org",
+    "url": "https://github.com/aihohu"
+  },
+  "repository": {
+    "url": "https://github.com/aihohu/vitepress-ai-i18n.git"
+  },
+  "license": "MIT",
+  "packageManager": "pnpm@10.12.3",
+  "dependencies": {
+    "cac": "^6.7.14",
+    "chalk": "^5.6.2",
+    "crypto-js": "^4.2.0",
+    "dotenv": "^17.2.3",
+    "fast-glob": "^3.3.3",
+    "fs-extra": "^11.3.3",
+    "openai": "^6.15.0",
+    "ora": "^9.0.0"
+  },
+  "devDependencies": {
+    "@types/crypto-js": "^4.2.2",
+    "@types/fs-extra": "^11.0.4",
+    "@types/node": "^25.0.3",
+    "eslint-config-prettier": "^10.1.8",
+    "prettier": "3.7.4",
+    "tsup": "^8.5.1",
+    "tsx": "^4.21.0",
+    "typescript": "^5.9.3"
+  }
+}

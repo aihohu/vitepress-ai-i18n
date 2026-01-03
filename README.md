@@ -1,2 +1,207 @@
-# vitepress-ai-i18n
-Vitepress Automatic i18n Translation Tool
+# vpi (VitePress AI I18n)
+
+**vpi** is a high-performance CLI tool designed to automate the internationalization (i18n) of VitePress projects using AI. It translates your Markdown documents and synchronizes your navigation/sidebar configurations with a single command.
+
+## ✨ Features
+
+* **🚀 One-Click All**: Translate documents and sync VitePress menus (`nav`/`sidebar`) in one go.
+* **🧠 Intelligent Translation**: Powered by AI (OpenAI, DeepSeek, etc.) to maintain technical context and Markdown structure.
+* **⚡ Incremental Updates**: Uses a hash-based cache system to only translate new or modified files, saving you time and API tokens.
+* **📚 Glossary Support**: Lock professional terminology to ensure consistency across all languages.
+* **🌍 Multi-Target**: Support for translating into multiple languages simultaneously (e.g., `en,jp,fr`).
+* **🛠️ Tech-Friendly**: Automatically detects `.ts`, `.mts`, and `.js` configurations.
+
+---
+
+## 📦 Installation
+
+```bash
+pnpm add -D vitepress-ai-i18n
+# or
+npm install -D vitepress-ai-i18n
+
+```
+
+---
+
+## 🚀 Quick Start
+
+### 1. Configure Environment
+
+Create a `.env` file in your root directory:
+
+```env
+AI_API_KEY=your_api_key_here
+AI_MODEL=deepseek-chat
+AI_BASE_URL=https://api.deepseek.com/v1
+
+```
+
+### 2. Initialize Config (Optional)
+
+Create `vpi18n.config.json` for persistent settings:
+
+```json
+{
+  "source": "docs",
+  "target": "en,jp",
+  "glossary": "./glossary.json"
+}
+
+```
+
+### 3. Run vpi
+
+```bash
+# Translate everything and sync menus
+npx vpi all
+
+# Or use specific commands
+npx vpi gen   # Docs only
+npx vpi sync  # Menu only
+
+```
+
+---
+
+## 🛠️ VitePress Integration
+
+`vpi` generates a clean JSON file for your menus in `your-source/.vitepress/i18n/`. Simply import it into your `config.mts`:
+
+```typescript
+import enMenu from './i18n/en.json'
+
+export default defineConfig({
+  locales: {
+    root: { label: '简体中文', lang: 'zh' },
+    en: { 
+      label: 'English', 
+      lang: 'en', 
+      link: '/en/',
+      themeConfig: {
+        nav: enMenu.nav,
+        sidebar: enMenu.sidebar
+      }
+    }
+  }
+})
+
+```
+
+---
+
+## 📖 Configuration Reference
+
+| Option | Env / Config | Description | Default |
+| --- | --- | --- | --- |
+| `--source` | `source` | Documentation root directory | `docs` |
+| `--target` | `target` | Target languages (comma-separated) | `en` |
+| `--model` | `AI_MODEL` | AI model to use | `gpt-4o-mini` |
+| `--glossary` | `glossary` | Path to glossary JSON file | `null` |
+
+### Glossary Example
+
+`glossary.json`:
+
+```json
+{
+  "Hydration": "激活",
+  "VitePress": "VitePress"
+}
+
+```
+
+---
+
+## 🚀 Advanced Usage
+
+`vpi` is compatible with any AI provider that supports the OpenAI-compatible API. This gives you the freedom to choose the most cost-effective or highest-performing model for your needs.
+
+### LLM
+
+**DeepSeek**
+
+```env
+AI_BASE_URL=https://api.deepseek.com
+AI_API_KEY=your_deepseek_key
+AI_MODEL=deepseek-chat
+
+```
+
+**Qwen (DashScope)**
+
+```env
+AI_BASE_URL=https://dashscope.aliyuncs.com/compatible-mode/v1
+AI_API_KEY=your_dashscope_key
+AI_MODEL=qwen-max
+
+```
+
+**Google Gemini**
+You can get a free API key from [Google AI Studio](https://aistudio.google.com/).
+
+```env
+AI_BASE_URL=https://generativelanguage.googleapis.com/v1beta/openai/
+AI_API_KEY=your_gemini_key
+AI_MODEL=gemini-1.5-pro
+
+```
+
+**Groq (Blazing Fast)**
+Perfect for large-scale documentation projects.
+
+```env
+AI_BASE_URL=https://api.groq.com/openai/v1
+AI_API_KEY=your_groq_key
+AI_MODEL=llama-3.1-70b-versatile
+
+```
+
+### 3. Local LLM: 100% Free & Private (Ollama)
+
+If you prefer to run your translations locally for maximum privacy and zero cost, use [Ollama](https://ollama.com/).
+
+1. **Install Ollama** and pull a model:
+```bash
+ollama pull llama3
+
+```
+
+
+2. **Configure `.env**`:
+```env
+AI_BASE_URL=http://localhost:11434/v1
+AI_API_KEY=ollama (any string works)
+AI_MODEL=llama3
+
+```
+
+
+
+### 4. Selective Translation
+
+If you only want to process specific languages in a multi-language project, you can override the config via CLI:
+
+```bash
+# Only translate to French, ignoring other targets in config.json
+vpi all --target fr
+
+```
+
+---
+
+## 🤝 Contributing
+
+Contributions are welcome! Feel free to open an Issue or submit a Pull Request.
+
+1. Fork the Project
+2. Create your Feature Branch (`git checkout -b feature/AmazingFeature`)
+3. Commit your Changes (`git commit -m 'Add some AmazingFeature'`)
+4. Push to the Branch (`git push origin feature/AmazingFeature`)
+5. Open a Pull Request
+
+---
+
+## 📄 License
+
+Distributed under the MIT License. See `LICENSE` for more information.

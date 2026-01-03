@@ -1,0 +1,18 @@
+{
+  "VitePress": "VitePress",
+  "Vite": "Vite",
+  "Vue": "Vue",
+  "Hydration": "激活",
+  "Frontmatter": "前置元数据",
+  "Sidebar": "侧边栏",
+  "Navbar": "导航栏",
+  "Markdown": "Markdown",
+  "Deployment": "部署",
+  "Component": "组件",
+  "Props": "属性",
+  "Layout": "布局",
+  "Client-side": "客户端",
+  "Server-side rendering": "服务端渲染 (SSR)",
+  "Directives": "指令",
+  "Routing": "路由"
+}
