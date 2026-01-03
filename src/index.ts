@@ -1,5 +1,5 @@
 /**
- * VPI - VitePress AI I18n Tool
+ * VPI - VitePress AI i18n Tool
  * A CLI tool to automate VitePress documentation translation using AI.
  * * @author HoHu@hohu.org
  * @license MIT
@@ -17,7 +17,7 @@ import { getFileHash, loadCache, saveCache } from './utils.js';
 
 const cli = cac('vpi');
 
-// --- I18n for CLI Terminal UI ---
+// --- i18n for CLI Terminal UI ---
 // Detect system language (supports zh/en)
 const isZh = Intl.DateTimeFormat().resolvedOptions().locale.startsWith('zh');
 const t = {

@@ -1,4 +1,9 @@
-# vpi (VitePress AI I18n)
+<div align="center">
+  <h1>vpi (VitePress AI i18n)</h1>
+  <span>English | <a href="./README_zh.md">中文</a></span>
+</div>
+
+---
 
 **vpi** is a high-performance CLI tool designed to automate the internationalization (i18n) of VitePress projects using AI. It translates your Markdown documents and synchronizes your navigation/sidebar configurations with a single command.
 
@@ -26,29 +31,14 @@ npm install -D vitepress-ai-i18n
 
 ## 🚀 Quick Start
 
-### 1. Configure Environment
+### 1. Initialization (Automatically generates .env and configuration files)
 
-Create a `.env` file in your root directory:
-
-```env
-AI_API_KEY=your_api_key_here
-AI_MODEL=deepseek-chat
-AI_BASE_URL=https://api.deepseek.com/v1
+```bash
+npx vpi init
 
 ```
 
-### 2. Initialize Config (Optional)
-
-Create `vpi18n.config.json` for persistent settings:
-
-```json
-{
-  "source": "docs",
-  "target": "en,jp",
-  "glossary": "./glossary.json"
-}
-
-```
+### 2. Configuration Edit the .env file and enter your AI_API_KEY.
 
 ### 3. Run vpi
 

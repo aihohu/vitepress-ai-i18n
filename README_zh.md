@@ -1,4 +1,9 @@
-# vpi (VitePress AI 国际化工具)
+<div align="center">
+	<h1>vpi (VitePress AI 国际化工具)</h1>
+  <span>中文 | <a href="./README.md">English</a></span>
+</div>
+
+---
 
 **vpi** 是一款专为 VitePress 设计的高性能 AI 自动化国际化 (i18n) 命令行工具。只需一行命令，即可完成文档翻译与菜单配置同步。
 
@@ -26,29 +31,14 @@ npm install -D vitepress-ai-i18n
 
 ## 🚀 快速上手
 
-### 1. 配置环境变量
+### 1. 初始化 (自动生成 .env 和配置文件)
 
-在项目根目录创建 `.env` 文件：
-
-```env
-AI_API_KEY=你的密钥
-AI_MODEL=deepseek-chat
-AI_BASE_URL=https://api.deepseek.com/v1
+```bash
+npx vpi init
 
 ```
 
-### 2. 初始化配置 (可选)
-
-创建 `vpi18n.config.json` 以持久化常用设置：
-
-```json
-{
-  "source": "docs",
-  "target": "en,jp",
-  "glossary": "./glossary.json"
-}
-
-```
+### 2. 配置 编辑 .env 文件并填入您的 AI_API_KEY。
 
 ### 3. 运行 vpi
 
