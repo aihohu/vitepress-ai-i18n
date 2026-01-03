@@ -31,7 +31,7 @@ npm install -D vitepress-ai-i18n
 
 ## 🚀 Quick Start
 
-### 1. Initialization (Automatically generates .env and configuration files)
+### 1. Initialization
 
 ```bash
 npx vpi init
@@ -39,6 +39,27 @@ npx vpi init
 ```
 
 ### 2. Configuration Edit the .env file and enter your AI_API_KEY.
+
+- .env
+
+  ```bash
+  AI_API_KEY=your_api_key_here
+  AI_MODEL=deepseek-chat # Default gpt-4o-mini
+  AI_BASE_URL=https://api.deepseek.com/v1 # Default OPENAI
+  ```
+
+  
+
+- vpi18n.config.json
+
+  ```bash
+  {
+    "source": "docs",
+    "target": "zh", # Languages ​​to be translated into (examples: zh, fr)
+    "glossary": null
+  }
+  ```
+
 
 ### 3. Run vpi
 
@@ -85,7 +106,7 @@ export default defineConfig({
 | Option | Env / Config | Description | Default |
 | --- | --- | --- | --- |
 | `--source` | `source` | Documentation root directory | `docs` |
-| `--target` | `target` | Target languages (comma-separated) | `en` |
+| `--target` | `target` | Target languages (comma-separated) | `zh` |
 | `--model` | `AI_MODEL` | AI model to use | `gpt-4o-mini` |
 | `--glossary` | `glossary` | Path to glossary JSON file | `null` |
 

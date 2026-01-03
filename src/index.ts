@@ -73,7 +73,7 @@ async function getResolvedConfig(options: any): Promise<Config> {
         fileConfig = await fs.readJson(configPath);
     }
 
-    const targetStr = options.target || fileConfig.target || 'en';
+    const targetStr = options.target || fileConfig.target || 'zh';
     const targets = targetStr.split(',').map((t: string) => t.trim());
 
     return {
