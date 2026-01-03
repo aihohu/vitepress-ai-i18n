@@ -33,7 +33,13 @@ const t = {
     syncSuccess: (f: string) => isZh ? `菜单已同步: ${f}` : `Menu synced: ${f}`,
     allDone: isZh ? '\n✨ 所有国际化任务处理完成！' : '\n✨ All i18n tasks completed!',
     noKey: isZh ? '\n❌ 错误: 未发现环境变量 AI_API_KEY。' : '\n❌ Error: AI_API_KEY not found in .env.',
-    noConfig: (p: string) => isZh ? `❌ 错误: 在 ${p} 中未找到配置文件` : `❌ Error: Config file not found in ${p}`
+    noConfig: (p: string) => isZh ? `❌ 错误: 在 ${p} 中未找到配置文件` : `❌ Error: Config file not found in ${p}`,
+    initStart: isZh ? '🚀 开始初始化配置...' : '🚀 Initializing configurations...',
+    envCreated: isZh ? '  ✅ 已生成 .env 模板' : '  ✅ Created .env template',
+    envExists: isZh ? '  ⚠️ .env 已存在，跳过' : '  ⚠️ .env already exists, skipping',
+    configCreated: isZh ? '  ✅ 已生成 vpi18n.config.json' : '  ✅ Created vpi18n.config.json',
+    configExists: isZh ? '  ⚠️ vpi18n.config.json 已存在，跳过' : '  ⚠️ vpi18n.config.json already exists, skipping',
+    initDone: isZh ? '\n✨ 初始化完成！请编辑 .env 文件配置您的 API Key。' : '\n✨ Init complete! Please edit .env to set your API Key.'
 };
 
 interface Config {
@@ -178,7 +184,48 @@ async function runSync(config: Config) {
     }
 }
 
+/**
+ * Core Logic: Initialize configuration files
+ */
+async function runInit() {
+    const envPath = path.resolve('.env');
+    const configPath = path.resolve('vpi18n.config.json');
+
+    console.log(chalk.cyan(t.initStart));
+
+    // Create .env template
+    if (!(await fs.pathExists(envPath))) {
+        const envContent = `AI_API_KEY=your_api_key_here
+AI_MODEL=deepseek-chat
+AI_BASE_URL=https://api.deepseek.com/v1
+`;
+        await fs.writeFile(envPath, envContent);
+        console.log(chalk.green(t.envCreated));
+    } else {
+        console.log(chalk.yellow(t.envExists));
+    }
+
+    // Create vpi18n.config.json
+    if (!(await fs.pathExists(configPath))) {
+        const configContent = {
+            source: 'docs',
+            target: 'en',
+            model: 'deepseek-chat',
+            glossary: null
+        };
+        await fs.writeJson(configPath, configContent, { spaces: 2 });
+        console.log(chalk.green(t.configCreated));
+    } else {
+        console.log(chalk.yellow(t.configExists));
+    }
+
+    console.log(chalk.blue.bold(t.initDone));
+}
+
+
 // --- CLI Commands Registration ---
+
+cli.command('init', 'Initialize configuration files (.env & config.json)').action(runInit);
 
 cli.command('gen', 'Translate Markdown documents')
     .option('-t, --target <lang>', 'Target language(s), e.g., en,jp')
@@ -201,5 +248,4 @@ cli.command('all', 'Translate docs and sync menu (Default)')
 cli.command('[...args]', 'Shortcut for "all"').action(() => cli.parse(['', '', 'all']));
 
 cli.help();
-cli.version('1.3.0');
 cli.parse();
