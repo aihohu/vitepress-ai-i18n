@@ -80,21 +80,24 @@ npx vpi sync  # Menu only
 `vpi` generates a clean JSON file for your menus in `your-source/.vitepress/i18n/`. Simply import it into your `config.mts`:
 
 ```typescript
-import enMenu from './i18n/en.json'
+import zhConfig from './i18n/zh.json'
 
 export default defineConfig({
   locales: {
-    root: { label: '简体中文', lang: 'zh' },
-    en: { 
-      label: 'English', 
-      lang: 'en', 
-      link: '/en/',
+    root: {
+      label: 'English',
+      lang: 'en'
+    },
+    zh: {
+      label: '简体中文',
+      lang: 'zh',
+      link: '/zh/',
       themeConfig: {
-        nav: enMenu.nav,
-        sidebar: enMenu.sidebar
+        nav: zhConfig.nav,
+        sidebar: zhConfig.sidebar
       }
-    }
-  }
+    },
+  },
 })
 
 ```

@@ -90,21 +90,24 @@ npx vpi sync  # 仅同步菜单
 `vpi` 会在 `你的文档目录/.vitepress/i18n/` 下生成纯 JSON 配置文件。你只需在 `config.mts` 中引入即可：
 
 ```typescript
-import enMenu from './i18n/en.json'
+import zhConfig from './i18n/zh.json'
 
 export default defineConfig({
   locales: {
-    root: { label: '简体中文', lang: 'zh' },
-    en: { 
-      label: 'English', 
-      lang: 'en', 
-      link: '/en/',
+    root: {
+      label: 'English',
+      lang: 'en'
+    },
+    zh: {
+      label: '简体中文',
+      lang: 'zh',
+      link: '/zh/',
       themeConfig: {
-        nav: enMenu.nav,
-        sidebar: enMenu.sidebar
+        nav: zhConfig.nav,
+        sidebar: zhConfig.sidebar
       }
-    }
-  }
+    },
+  },
 })
 
 ```
