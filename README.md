@@ -7,6 +7,8 @@
 
 **vpi** is a high-performance CLI tool designed to automate the internationalization (i18n) of VitePress projects using AI. It translates your Markdown documents and synchronizes your navigation/sidebar configurations with a single command.
 
+![vpi](assets/vpi.gif)
+
 ## ✨ Features
 
 * **🚀 One-Click All**: Translate documents and sync VitePress menus (`nav`/`sidebar`) in one go.
